@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: team-2
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://github.com/abhishekmaniy/multi-tanant-deployment.git
+  destinations:
+    - namespace: node-2
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

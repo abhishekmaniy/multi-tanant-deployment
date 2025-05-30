@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-2-app
+  namespace: argocd
+spec:
+  project: team-2
+  source:
+    repoURL: https://github.com/abhishekmaniy/multi-tanant-deployment.git
+    targetRevision: HEAD
+    path: team-2
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: node-2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
